@@ -4,8 +4,8 @@ namespace App;
 
 class Config {
     /**
-     * path to the sqlite file
+     * path to the sqlite file (from project root folder)
      */
-    const PATH_TO_SQLITE_FILE = 'db/sqlite.db';
+    const PATH_TO_SQLITE_FILE = 'db/db.sqlite';
 
 }

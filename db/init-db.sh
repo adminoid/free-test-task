@@ -1,3 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 file='db.sqlite'
-[ -e $file ] && rm $file && sqlite3 ./sqlite.db < ./init.sql
+sql='init.sql'
+[[ -e ${file} ]] && rm ${file}
+sqlite3 ./${file} < ./${sql}

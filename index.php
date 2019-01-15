@@ -4,10 +4,14 @@ require 'vendor/autoload.php';
 
 use App\SQLiteConnection;
 
-$pdo = (new SQLiteConnection())->connect();
-if ($pdo !== null) {
-    echo 'Connected to the SQLite database successfully!';
+$db = (new SQLiteConnection())->connection;
+
+$sql = 'SELECT login, password FROM users';
+
+foreach ($db->query($sql) as $row)
+{
+    echo "<pre>";
+    var_dump($row);
+    echo "</pre>";
 }
-else {
-    echo 'Whoops, could not connect to the SQLite database!';
-}
+$dbh = null;

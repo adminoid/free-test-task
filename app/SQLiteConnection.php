@@ -8,18 +8,26 @@
 
 namespace App;
 
+use \PDO, \PDOException;
+
 class SQLiteConnection {
 
-    private $pdo;
+    public $connection;
 
-    /**
-     * return in instance of the PDO object that connects to the SQLite database
-     * @return \PDO
-     */
-    public function connect() {
-        if ($this->pdo === null) {
-            $this->pdo = new \PDO("sqlite:" . Config::PATH_TO_SQLITE_FILE);
+    public function __construct()
+    {
+        try
+        {
+
+            $dbh = new PDO('sqlite:' . Config::PATH_TO_SQLITE_FILE);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection = $dbh;
+
         }
-        return $this->pdo;
+        catch (PDOException $e)
+        {
+
+            echo 'Connection failed: ' . $e->getMessage();
+        }
     }
 }

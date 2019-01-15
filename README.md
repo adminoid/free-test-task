@@ -2,6 +2,5 @@
 
 ## Initialize database
 ```bash
-cd db
-./init-db.sh
+cd db && ./init-db.sh
 ```
