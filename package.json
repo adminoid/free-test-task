@@ -2,12 +2,12 @@
   "name": "test-task",
   "version": "0.9.0",
   "description": "Test task for BeeJee",
-  "main": "./assets/src/index.js",
   "author": "Petr Zenin <mr@adminoid.com>",
   "license": "MIT",
   "scripts": {
-    "run-server": "cd public && php -S localhost:8080",
-    "build-css": "node-sass assets/scss/index.scss public/style.min.css --output-style=compressed"
+    "run-server": "php -S localhost:8080 public/index.php",
+    "css": "node-sass assets/scss/style.scss -o public/ --output-style=compressed",
+    "css:watch": "npm run css && node-sass assets/scss/style.scss -wo public/ --output-style=compressed"
   },
   "dependencies": {
     "bootstrap": "^4.2.1"

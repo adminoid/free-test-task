@@ -1,21 +1,15 @@
 <?php
 
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
-use App\SQLiteConnection;
-use Jenssegers\Blade\Blade;
+session_start();
 
-$db = (new SQLiteConnection())->connection;
+//use App\SQLiteConnection;
 
-$sql = 'SELECT login, password FROM users';
 
-//foreach ($db->query($sql) as $row)
-//{
-//    var_dump($row);
-//}
+use App\Router;
 
-$blade = new Blade(['../assets/views'], '../assets/views-cache');
+$router = new Router();
+$router->runController();
 
-echo $blade->make('index', ['name' => 'John Doe']);
-
-$dbh = null;
+session_destroy();
