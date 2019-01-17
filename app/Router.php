@@ -9,7 +9,7 @@ use App\Controllers\Page;
 class Router
 {
 
-    public $path, $query, $method, $backPath;
+    public $path, $query, $method, $backPath, $validParam;
 
     public function __construct()
     {
@@ -88,17 +88,17 @@ class Router
     private function validate($data)
     {
 
-        // TODO: next - validating...
-        if (array_key_exists('REQUEST_METHOD', $_SERVER)) {
-
-            if (
-                $_SERVER['REQUEST_METHOD'] !== 'GET' &&
-                !in_array(strtolower($_SERVER['REQUEST_METHOD']), $data['methods'], false)
-            ) {
-                new Error(405);
-            }
+        if (
+            array_key_exists('REQUEST_METHOD', $_SERVER) &&
+            !in_array(strtolower($_SERVER['REQUEST_METHOD']), $data['methods'], false)
+        ) {
+            new Error(405);
         }
 
+        $bad_keys = array_diff(array_keys($_REQUEST), array_keys($data['params']));
+        $validParam =array_diff_key($_REQUEST,array_flip($bad_keys));
+
+        $this->validParam = $validParam;
 
     }
 

@@ -27,6 +27,8 @@ class Error
             'error' => $errors[$code],
         ]);
 
+        die;
+
     }
 
 }
