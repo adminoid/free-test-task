@@ -18,10 +18,14 @@ class SQLiteConnection {
     {
         try
         {
+            $databaseFile = 'sqlite:' . Config::PATH_TO_SQLITE_FILE;
 
-            $dbh = new PDO('sqlite:' . Config::PATH_TO_SQLITE_FILE);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->connection = $dbh;
+            $pdo = new PDO($databaseFile,'','', [
+                PDO::ATTR_PERSISTENT => true
+            ]);
+
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection = $pdo;
 
         }
         catch (PDOException $e)

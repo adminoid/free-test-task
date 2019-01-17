@@ -4,7 +4,7 @@ namespace App;
 
 use App\Controllers\Error;
 use App\Controllers\Page;
-
+use http\Params;
 
 class Router
 {
@@ -75,7 +75,10 @@ class Router
         if (array_key_exists($this->path, $routes)) {
 
             $routeData = $routes[$this->path];
-            $this->validate($routeData);
+            $validParams = $this->validate($routeData);
+            $className = 'App\Controllers\\' . $routeData['controller'];
+
+            new $className($validParams);
 
         } else {
 
@@ -98,7 +101,7 @@ class Router
         $bad_keys = array_diff(array_keys($_REQUEST), array_keys($data['params']));
         $validParam =array_diff_key($_REQUEST,array_flip($bad_keys));
 
-        $this->validParam = $validParam;
+        return $validParam;
 
     }
 
